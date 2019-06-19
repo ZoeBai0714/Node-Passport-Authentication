@@ -13,7 +13,19 @@ class Login extends React.Component{
                            <label>Email</label>
                            <input type = "email" name = "email" className = "form-control" placeholder = "Enter email"/>
                        </div>
+
+                       <div className = "form-group">
+                           <label>Password</label>
+                           <input type = "password" name = "password" className = "form-control" placeholder = "Enter password"/>
+                       </div>
+
+                       <div className = "form-group">
+                           <label>Confirm Password</label>
+                           <input type = "password" name = "confirm-password" className = "form-control" placeholder = "Confirm passowrd"/>
+                       </div>
+                       <button type = "submit" className = "btn btn-primary btn-block">Login</button>
                    </form>
+                   <p class="lead mt-4">No Account? <a href="/users/register">Register</a></p>
                 </div>
              </div>
            </div>
