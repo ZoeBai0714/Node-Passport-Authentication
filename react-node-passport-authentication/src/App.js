@@ -7,13 +7,11 @@ import Home from './Components/Home';
 function App() {
   return (
     <Router>
-      <div>
         <Route exact path = "/" component = {Home}/>
-        <Route exact path = "/register" component = {Register}/>
-        <Route exact path = "/login" component = {Login}/>
-      </div>
+        <Route exact path = "/users/register" component = {Register}/>
+        <Route exact path = "/users/login" component = {Login}/>
     </Router>
-  );
+  ); 
 }
 
 export default App;
