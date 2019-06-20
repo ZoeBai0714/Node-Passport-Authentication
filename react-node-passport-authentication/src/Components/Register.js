@@ -7,7 +7,8 @@ class Register extends React.Component{
         name:"",
         email:"",
         password:"",
-        confirmPassword:""
+        confirmPassword:"",
+        redirect:false
     }
 
     handleSubmit = (e) =>{
@@ -22,9 +23,8 @@ class Register extends React.Component{
                    body:JSON.stringify(this.state)
                 }).then(res=>res.json())
                   .then(data=>{
-                      console.log(data)
-                      if(data == "pass"){
-                          return <Redirect to='/users/login'/>
+                      if(data.msg == "pass"){
+                         this.setState({redirect:true})
                       }
                     })     
     }
@@ -35,9 +35,13 @@ class Register extends React.Component{
       })
     }
 
+    
+
    render(){
        return(
-           <div className = "row mt-5">
+        <div>
+            {this.state.redirect? <Redirect to = '/users/login'/> : 
+            <div className = "row mt-5">
              <div className="col-md-6 m-auto">
                <div className="card card-body text-center">
                     <h1 className="text-center mb-3"><i className="fas fa-user-plus"></i>Register</h1>
@@ -66,7 +70,9 @@ class Register extends React.Component{
                     <p className="lead mt-4">Have An Account? <a href="/users/login">Login</a></p>
                 </div>
               </div>
-            </div>
+            </div>}
+           
+        </div>
        )
    }
 }
