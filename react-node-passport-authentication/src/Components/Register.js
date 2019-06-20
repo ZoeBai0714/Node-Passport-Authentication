@@ -25,8 +25,9 @@ class Register extends React.Component{
                    body:JSON.stringify(this.state)
                 }).then(res=>res.json())
                   .then(data=>{
+                      console.log(data)
                       if(data.validation == "pass"){
-                         this.setState({redirect:true})
+                          this.setState({redirect:true})
                       }else{
                           this.setState({errors:data.msg})
                       }

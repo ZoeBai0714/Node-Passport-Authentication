@@ -14,29 +14,37 @@ router.post('/register', (req, res)=>{
     //check all fields
     if(!name || !email || !password || !confirmPassword){
         errors["msg"] = "Please fill in all fields";
+        res.send(errors)
     }else if(password !== confirmPassword){
         errors["msg"] = "Passwords do not match";
+        res.send(errors)
     }else if(password.length < 6){
         errors["msg"] = "Password should be at least 6 characters"
+        res.send(errors)
     }else{
-        errors["validation"] = "pass"
         //create a user
         User.findOne({email:email})
         .then(user => {
                 if(user){
-                 errors["msg"] = "Email is already registered"
+                 errors["msg"] = "Email is already registered";
                 }else{
-                 bcrypt.hash(password, 10, (err, hashedPassword) =>{
+                  errors["validation"] = "pass"   
+                  bcrypt.hash(password, 10, (err, hashedPassword) =>{
+                     if(err) throw err
                     const newUser = new User({name:name, email:email, password:hashedPassword})
-                    console.log(newUser)
+                    newUser.save()
+                     .then()
+                     .catch(err => console.log(err))
+                      console.log(newUser)
+                      errors["msg"] = "pass"
                  })   
                  
                 }
             }
         )
-    }
-    
-   res.send(errors)
+        .then(()=> res.send(errors))
+        
+     }
    
 });
 
