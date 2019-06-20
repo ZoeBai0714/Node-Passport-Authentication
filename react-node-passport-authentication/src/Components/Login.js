@@ -2,8 +2,12 @@ import React from 'react';
 import './bootstrap.css';
 
 class Login extends React.Component{
+    
    render(){
+       console.log(this.props)
        return(
+           <div>
+               {this.props.flashMsg.length >0? <div className = "alert alert-success" role = "alert">{this.props.flashMsg}</div> :null}
            <div className = "row mt-5">
              <div class="col-md-6 m-auto">
                 <div class="card card-body">
@@ -28,6 +32,7 @@ class Login extends React.Component{
                    <p class="lead mt-4">No Account? <a href="/users/register">Register</a></p>
                 </div>
              </div>
+           </div>
            </div>
        )
    }

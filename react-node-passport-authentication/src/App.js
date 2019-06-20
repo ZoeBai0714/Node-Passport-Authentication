@@ -4,14 +4,26 @@ import Login from './Components/Login';
 import Register from './Components/Register';
 import Home from './Components/Home';
 
-function App() {
-  return (
-    <Router>
-        <Route exact path = "/" component = {Home}/>
-        <Route exact path = "/users/register" component = {Register}/>
-        <Route exact path = "/users/login" component = {Login}/>
-    </Router>
-  ); 
+class App extends React.Component{
+  state = {
+    flashMsg:""
+  }
+
+  handleFlashMsg = (msg) =>{
+     this.setState({
+       flashMsg:msg
+     })
+  }
+
+  render(){
+      return (
+      <Router>
+          <Route exact path = "/" component = {Home}/>
+          <Route exact path = "/users/register" render = {() => <Register flashMsg = {(msg)=> this.handleFlashMsg(msg)}/>}/>
+          <Route exact path = "/users/login" render = {() =><Login flashMsg = {this.state.flashMsg}/>}/>
+      </Router>
+    ); 
+  }
 }
 
 export default App;

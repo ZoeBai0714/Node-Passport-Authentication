@@ -28,6 +28,7 @@ class Register extends React.Component{
                       console.log(data)
                       if(data.validation == "pass"){
                           this.setState({redirect:true})
+                          this.sendFlashMsg()
                       }else{
                           this.setState({errors:data.msg})
                       }
@@ -41,6 +42,9 @@ class Register extends React.Component{
     }
 
     
+    sendFlashMsg = () =>{
+        this.props.flashMsg('You are now registered and can log in')
+    }
 
    render(){
        return(
