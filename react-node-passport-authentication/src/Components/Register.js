@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import './bootstrap.css'
+
 const URL = "http://localhost:3000/users/register"
 class Register extends React.Component{
     state = {
@@ -8,7 +9,8 @@ class Register extends React.Component{
         email:"",
         password:"",
         confirmPassword:"",
-        redirect:false
+        redirect:false,
+        errors:""
     }
 
     handleSubmit = (e) =>{
@@ -25,6 +27,8 @@ class Register extends React.Component{
                   .then(data=>{
                       if(data.msg == "pass"){
                          this.setState({redirect:true})
+                      }else{
+                          this.setState({errors:data.msg})
                       }
                     })     
     }
@@ -40,6 +44,7 @@ class Register extends React.Component{
    render(){
        return(
         <div>
+            {this.state.errors.length>0? <div className ="alert alert-warning alert-dismissible fade show" role = "alert"><strong>{this.state.errors}</strong></div> : null}
             {this.state.redirect? <Redirect to = '/users/login'/> : 
             <div className = "row mt-5">
              <div className="col-md-6 m-auto">
