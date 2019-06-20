@@ -3,6 +3,7 @@ const app = express();
 const port = process.env.port || 3000;
 const cors = require('cors');
 const bodyParser = require('body-parser');
+
 //connect to MongoDB
 const mongoose = require('mongoose');
 const db = require('./config/keys').MongoURI; 
