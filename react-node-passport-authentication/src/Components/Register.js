@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import './bootstrap.css'
 const URL = "http://localhost:3000/users/register"
 class Register extends React.Component{
@@ -20,7 +21,12 @@ class Register extends React.Component{
                    },
                    body:JSON.stringify(this.state)
                 }).then(res=>res.json())
-                  .then(data=>console.log(data))     
+                  .then(data=>{
+                      console.log(data)
+                      if(data == "pass"){
+                          return <Redirect to='/users/login'/>
+                      }
+                    })     
     }
 
     handleChange = (e) =>{
