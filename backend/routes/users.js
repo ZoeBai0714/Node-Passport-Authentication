@@ -55,30 +55,10 @@ router.post('/login', (req, res, next) =>{
         if(findUser == false){
             res.send({msg:info.message})
         }else{
-            res.send({msg:"You are now logged in"})
+            res.send({msg:"logged in"})
         }
     })(req, res, next);
 })
 
 module.exports = router;
 
-/*
-  passport.authenticate('local', function(err, user, info) {
-    if (err) { return next(err); }
-    if (!user) { return res.redirect('/login'); }
-    req.logIn(user, function(err) {
-      if (err) { return next(err); }
-      return res.redirect('/users/' + user.username);
-    });
-  })(req, res, next);
-*/
-
-
-/*
-
-    // passport.authenticate('local',{
-    //     successRedirect: '/dashboard',
-    //     failureRedirect:'/users/login'
-    //     // failureFlash: true
-    // })(req, res, next);
-*/

@@ -46,7 +46,7 @@ class Register extends React.Component{
         this.props.flashMsg('You are now registered and can log in')
     }
 
-   render(){
+   render(){ 
        return(
         <div>
             {this.state.errors.length>0? <div className ="alert alert-warning alert-dismissible fade show" role = "alert"><strong>{this.state.errors}</strong></div> : null}
