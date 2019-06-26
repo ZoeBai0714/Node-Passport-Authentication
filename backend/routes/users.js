@@ -55,7 +55,8 @@ router.post('/login', (req, res, next) =>{
         if(findUser == false){
             res.send({msg:info.message})
         }else{
-            res.send({msg:"logged in"})
+            info.password = null
+            res.send(info)
         }
     })(req, res, next);
 })

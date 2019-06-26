@@ -9,7 +9,8 @@ class Login extends React.Component{
         email:"",
         password:"",
         login: false,
-        msg:""
+        msg:"",
+        userName:""
     }
 
     handleChange = (e) =>{
@@ -29,10 +30,15 @@ class Login extends React.Component{
               body:JSON.stringify(this.state)
         }).then(res => res.json())
           .then(data => {
-                if(data.msg !== "logged in"){
+                console.log(data)
+                if(data.msg){
                     this.setState({msg: data.msg})
                 }else{
-                    this.setState({login:true})
+                    this.setState({
+                        login:true,
+                         userName:data.name 
+                    })
+                    this.props.userName(this.state.userName)
                 }
           })
     }

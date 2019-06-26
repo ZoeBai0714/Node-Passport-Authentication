@@ -8,7 +8,8 @@ import Welcome from './Components/Welcome';
 class App extends React.Component{
   state = {
     flashMsg:"",
-    loggedIn:false
+    loggedIn:false,
+    userName: ""
   }
 
   handleFlashMsg = (msg) =>{
@@ -17,19 +18,20 @@ class App extends React.Component{
      })
   }
 
-  // handleLogin = () =>{
-  //   this.setState({
-  //     loggedIn:true
-  //   })
-  // }
+  setUserName = (name) =>{
+    this.setState({
+      userName:name
+    })
 
+    console.log(this.state)
+  }
   render(){
       return (
       <Router>
           <Route exact path = "/" component = {Home}/>
-          <Route exact path = "/welcome" component = {Welcome}/>
+          <Route exact path = "/welcome" render = {()=> <Welcome userName = {this.state.userName}/>}/>
           <Route exact path = "/users/register" render = {() => <Register flashMsg = {(msg)=> this.handleFlashMsg(msg)}/>}/>
-          <Route exact path = "/users/login" render = {() =><Login flashMsg = {this.state.flashMsg}/>}/>
+          <Route exact path = "/users/login" render = {() =><Login flashMsg = {this.state.flashMsg} userName = {(name) => this.setUserName(name)}/>}/>
       </Router>
     ); 
   }
