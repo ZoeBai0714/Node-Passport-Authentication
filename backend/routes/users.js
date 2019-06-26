@@ -50,13 +50,35 @@ router.post('/register', (req, res)=>{
 });
 
 router.post('/login', (req, res, next) =>{
-    console.log(`heyyyyy ${req.body}`)
-    passport.authenticate('local',{
-        successRedirect: '/dashboard',
-        failureRedirect:'/users/login'
-        // failureFlash: true
+    // console.log(req.body)
+    passport.authenticate('local',(err,findUser,info)=>{
+        if(findUser == false){
+            res.send({msg:info.message})
+        }else{
+            res.send({msg:"You are now logged in"})
+        }
     })(req, res, next);
-    console.log()
 })
 
 module.exports = router;
+
+/*
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err); }
+    if (!user) { return res.redirect('/login'); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.redirect('/users/' + user.username);
+    });
+  })(req, res, next);
+*/
+
+
+/*
+
+    // passport.authenticate('local',{
+    //     successRedirect: '/dashboard',
+    //     failureRedirect:'/users/login'
+    //     // failureFlash: true
+    // })(req, res, next);
+*/
